@@ -9,11 +9,11 @@ describe Node do
     expect(Node).to respond_to(:new).with(1).argument
   end
 
-  it 'should have a next and previous reference' do
-    expect(node).to respond_to(:next)
+  it 'should have a next_node and previous reference' do
+    expect(node).to respond_to(:next_node)
     expect(node).to respond_to(:previous) 
 
-    expect(node).to respond_to(:next=)
+    expect(node).to respond_to(:next_node=)
     expect(node).to respond_to(:previous=)
   end
 
@@ -28,8 +28,8 @@ describe Node do
   end
   
 
-  it 'should have next and previous start as nil' do
-    expect(node.next).to be_nil
+  it 'should have next_node and previous start as nil' do
+    expect(node.next_node).to be_nil
     expect(node.previous).to be_nil
   end
   

@@ -22,15 +22,15 @@ describe List do
   it 'should push items to the end of the list and remove them' do
     list.push(1)
     expect(list.length).to eq(1)
-    list.push(2)
+    list << 2
     expect(list.length).to eq(2)
 
     expect(list.pop).to eq(2)
     expect(list.length).to eq(1)
     expect(list.pop).to eq(1)
     expect(list.length).to eq(0)
-
     expect(list.pop).to be_nil
+
     expect(list.length).to eq(0)
   end
 
@@ -49,8 +49,15 @@ describe List do
   it 'returns the value at the given index' do
     list.push(1)
     list.push(2)
+    list.push(3)
+    list.push(4)
+    list.push(5)
+
     expect(list[0]).to eq(1)
     expect(list[1]).to eq(2)
+    expect(list[2]).to eq(3)
+    expect(list[3]).to eq(4)
+    expect(list[4]).to eq(5)
   end
 
   it 'reassigns a value at a given index' do
@@ -61,7 +68,7 @@ describe List do
     expect(list[0]).to eq(5)
   end
 
-  it 'gets the first of last value' do
+  it 'gets the first and last value' do
     expect(list).to respond_to(:first)
     expect(list).to respond_to(:last)
 
@@ -106,5 +113,61 @@ describe List do
     expect(list.length).to eq(3)
     expect(list[1]).to eq(2)
     expect(list[2]).to eq(99)
+  end
+
+  it 'can shift' do 
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    expect(list.shift).to eq(1)
+    expect(list[0]).to eq(2)
+  end
+
+  it 'shift returns nil when list is empty' do
+    expect(list.shift).to eq(nil)
+  end
+
+  it 'can unshift on a list' do
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    list.unshift(0)
+
+    expect(list[0]).to eq(0)
+  end
+
+  it 'can unshift on an empty list' do
+    list.unshift(2)
+    expect(list[0]).to eq(2)
+  end
+
+  it "can convert to string" do
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    expect(list.to_s).to eq('1, 2, 3')
+  end
+
+  it "each yields to each item in the list" do
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    items = []
+    list.each { |i| items << i }
+    expect(items).to eq([1,2,3])
+  end
+
+  it 'can calculate the max' do
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    expect(list.max).to eq(3)
+  end
+  
+  it 'can calculate the min' do
+    list.push(1)
+    list.push(2)
+    list.push(3)
+    expect(list.min).to eq(1)
   end
 end
